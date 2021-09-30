@@ -1,0 +1,31 @@
+
+  description: "A business to business transfer of packages"
+  type: object
+  required: [ "id", "type", "source", "target", "item_list" ]
+  properties:
+    id:
+      description: "ULID"
+      type: string
+    source_licensee_number:
+      description: "The Source License of the materials, aka: Seller, Sold By"
+      type: string
+    destination_licensee_number:
+      description: "The Target License of the materials, aka: Buyer, Ship To"
+      type: string
+    estimated_depart_datetime:
+      description: Estimate of Departure Time
+      type: string
+      format: dateTime
+    estimated_arrival_datetime:
+      description: Estimate of Arrival Time
+      type: string
+      format: dateTime
+    item_list:
+      type: array
+      $ref: 'transfer_item.yaml'
+    products_lookup:
+        type: array
+        $ref: 'product.yaml'
+    lab_results_lookup:
+        type: array
+        $ref: 'lab_result.yaml'

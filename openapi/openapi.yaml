@@ -33,7 +33,7 @@ servers:
   - url: 'http://example.com/api/v1'
 paths:
   /echo:
-    $ref: paths/echo.yaml
+    $ref: paths/transfer_details.yaml
 components:
   securitySchemes:
     main_auth:

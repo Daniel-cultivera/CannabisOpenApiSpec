@@ -1,0 +1,15 @@
+#
+# Transfer Detail
+#
+get:
+  operationId: transfer_details
+  summary: Get Transfer Details
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '../components/schemas/transfer.yaml'

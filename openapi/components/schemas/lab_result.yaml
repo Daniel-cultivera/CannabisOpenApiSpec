@@ -1,0 +1,16 @@
+
+  description: "A description of a specific package"
+  type: object
+  required: [ "id", "name", "uom" ]
+  properties:
+    id:
+      type: string
+    lot_id:
+      description: "id that the sample was taken from"
+      type: string
+    lab_license_number:
+      type: string
+    compounds:
+      type: object
+      $ref: "lab_result_compound.yaml"
+    

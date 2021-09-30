@@ -33,33 +33,18 @@ servers:
   - url: 'http://example.com/api/v1'
 paths:
   /echo:
-    post:
-      tags:
-        - Echo
-      summary: Echo test
-      description: Receive the exact message you've sent
-      operationId: echo
-      security:
-        - api_key: []
-        - basic_auth: []
+    get:
+      operationId: transfer_details
+      summary: Get Transfer Details
       responses:
         '200':
-          description: OK
+          description: Success
           content:
             application/json:
               schema:
-                type: string
-              examples:
-                response:
-                  value: Hello world!
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: string
-              example: Hello world!
-        description: Echo payload
-        required: true
+                type: array
+                items:
+                  $ref: '#/components/schemas/transfer'
 components:
   securitySchemes:
     main_auth:
@@ -77,3 +62,136 @@ components:
     basic_auth:
       type: http
       scheme: basic
+  schemas:
+    transfer_item:
+      description: Details of a package on a transfer
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          description: ULID
+          type: string
+        inventory_tsid:
+          type: string
+        lab_result_tsid:
+          type: string
+        product_tsid:
+          type: string
+        sample_type:
+          type: string
+          enum:
+            - vendor
+            - educational
+        transfered_quantity:
+          type: number
+        unit_price:
+          type: number
+    product:
+      description: A description of a specific package
+      type: object
+      required:
+        - id
+        - name
+        - uom
+      properties:
+        id:
+          type: string
+        sku:
+          type: string
+        name:
+          type: string
+        uom:
+          type: string
+          enum:
+            - ea
+            - g
+            - mg
+            - ml
+        strain_name:
+          type: string
+        unit_weight:
+          type: number
+        unit_weight_uom:
+          type: string
+          enum:
+            - ea
+            - g
+            - mg
+            - ml
+    lab_result_compound:
+      description: A description of a specific package
+      type: object
+      required:
+        - name
+        - value
+      properties:
+        name:
+          type: string
+          enum:
+            - thca_percent
+            - thca_mg_g
+            - thc_percent
+            - thc_mg_g
+            - cbd_percent
+            - cbd_mg_g
+            - cbda_percent
+            - cbda_mg_g
+            - total_cbd
+            - total_thc
+        value:
+          type: number
+    lab_result:
+      description: A description of a specific package
+      type: object
+      required:
+        - id
+        - name
+        - uom
+      properties:
+        id:
+          type: string
+        lot_id:
+          description: id that the sample was taken from
+          type: string
+        lab_license_number:
+          type: string
+        compounds:
+          type: object
+          $ref: '#/components/schemas/lab_result_compound'
+    transfer:
+      description: A business to business transfer of packages
+      type: object
+      required:
+        - id
+        - type
+        - source
+        - target
+        - item_list
+      properties:
+        id:
+          description: ULID
+          type: string
+        source_licensee_number:
+          description: 'The Source License of the materials, aka: Seller, Sold By'
+          type: string
+        destination_licensee_number:
+          description: 'The Target License of the materials, aka: Buyer, Ship To'
+          type: string
+        estimated_depart_datetime:
+          description: Estimate of Departure Time
+          type: string
+          format: dateTime
+        estimated_arrival_datetime:
+          description: Estimate of Arrival Time
+          type: string
+          format: dateTime
+        item_list:
+          type: array
+          $ref: '#/components/schemas/transfer_item'
+        products_lookup:
+          type: array
+          $ref: '#/components/schemas/product'
+        lab_results_lookup:
+          type: array
+          $ref: '#/components/schemas/lab_result'

@@ -1,0 +1,21 @@
+
+  description: "A description of a specific package"
+  type: object
+  required: [ "id", "name", "uom" ]
+  properties:
+    id:
+      type: string
+    sku:
+      type: string
+    name:
+      type: string
+    uom:
+      type: string
+      enum: [ "ea", "g", "mg", "ml" ]
+    strain_name:
+      type: string
+    unit_weight:
+      type: number
+    unit_weight_uom:
+      type: string
+      enum: [ "ea", "g", "mg", "ml" ]

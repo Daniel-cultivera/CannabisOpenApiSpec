@@ -1,0 +1,23 @@
+
+  description: "Details of a package on a transfer"
+  type: object
+  required: [ "id" ]
+  properties:
+    id:
+      description: "ULID"
+      type: string
+    inventory_tsid:
+      type: string
+    lab_result_tsid:
+      type: string
+    product_tsid:
+      type: string
+    sample_type:
+      type: string
+      enum: ["vendor","educational"]
+    transfered_quantity:
+      type: number
+    unit_price:
+      type: number
+
+   

@@ -1,0 +1,10 @@
+
+  description: "A description of a specific package"
+  type: object
+  required: ["name", "value" ]
+  properties:
+    name:
+      type: string
+      enum: ["thca_percent","thca_mg_g","thc_percent","thc_mg_g","cbd_percent","cbd_mg_g","cbda_percent","cbda_mg_g","total_cbd","total_thc"]
+    value:
+      type: number
