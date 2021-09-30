@@ -1,0 +1,17 @@
+openapi: 3.1.0
+info:
+  title: WCIA B2B Transfer
+  version: 1.0.0
+
+components:
+  schemas:
+    Transfer:
+      required:
+        - id
+        - type
+      properties:
+        id:
+          type: string
+          format: int64
+        type:
+          type: string
