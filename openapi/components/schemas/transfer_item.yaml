@@ -1,23 +1,41 @@
-
-  description: "Details of a package on a transfer"
-  type: object
-  required: [ "id" ]
-  properties:
-    id:
-      description: "ULID"
-      type: string
-    inventory_tsid:
-      type: string
-    lab_result_tsid:
-      type: string
-    product_tsid:
-      type: string
-    sample_type:
-      type: string
-      enum: ["vendor","educational"]
-    transfered_quantity:
-      type: number
-    unit_price:
-      type: number
-
-   
+description: Details of a package on a transfer
+type: object
+examples:
+  - id: string
+    inventory_tsid: string
+    lab_result_tsid: string
+    product_tsid: string
+    sample_type: vendor
+    transfered_quantity: 0
+    unit_price: 0
+properties:
+  id:
+    description: ULID
+    type: string
+  inventory_id:
+    type: string
+    description: ULID of the inventory transfered.
+  lab_result_id:
+    type: string
+    description: ULID of the lab result associated with this inventory.
+  product_id:
+    type: string
+    description: ULID of the product
+  sample_type:
+    type: string
+    enum:
+      - vendor
+      - educational
+    description: Sample type if the item transfered is a sample this field indicates its type. set null if the item is not sample.
+  transfered_quantity:
+    type: number
+    description: 'Quantity of the item transfered '
+  unit_price:
+    type: number
+    description: 'Unit price of the product, can be set to zero if the prduct is sample.'
+required:
+  - id
+  - inventory_id
+  - product_id
+  - transfered_quantity
+  - unit_price

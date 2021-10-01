@@ -1,16 +1,34 @@
-
-  description: "A description of a specific package"
-  type: object
-  required: [ "id", "name", "uom" ]
-  properties:
-    id:
-      type: string
-    lot_id:
-      description: "id that the sample was taken from"
-      type: string
-    lab_license_number:
-      type: string
+description: A description of a specific package
+type: object
+examples:
+  - id: string
+    lot_tsid: string
+    lab_license_number: string
     compounds:
-      type: object
-      $ref: "lab_result_compound.yaml"
-    
+      - name: thc
+        value: 0
+        unit: mg_per_g
+  - id: string
+    lot_tsid: string
+    lab_license_number: string
+    compounds:
+      - name: thc
+        value: 0
+        unit: mg_per_g
+properties:
+  id:
+    type: string
+    description: 'Universally unique Id of the lab-result, this is assigned by the lab that carried out the test'
+  lot_tsid:
+    description: Id of the lot QA sample was taken and tested from
+    type: string
+  lab_license_number:
+    type: string
+    description: License number of the lab that tested the sample/lot
+  compounds:
+    type: array
+    items:
+      $ref: ./lab_result_compound.yaml
+required:
+  - id
+  - compounds

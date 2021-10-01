@@ -1,0 +1,20 @@
+title: product_unit_of_content
+type: object
+properties:
+  unit_of_measure:
+    type: string
+    description: Unit of measure of packaged content.
+    enum:
+      - gm
+      - ml
+      - ea
+  unit_value:
+    type: number
+    description: Unit weight or volume of its packaged content
+required:
+  - unit_of_measure
+  - unit_value
+examples:
+  - unit_of_measure: gm
+    unit_value: 0
+description: 'For packaged products this is used to indicate the unit of measure and unit weight or volume of its content. '

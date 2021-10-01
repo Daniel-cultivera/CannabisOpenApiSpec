@@ -1,21 +1,68 @@
-
-  description: "A description of a specific package"
-  type: object
-  required: [ "id", "name", "uom" ]
-  properties:
-    id:
-      type: string
-    sku:
-      type: string
-    name:
-      type: string
-    uom:
-      type: string
-      enum: [ "ea", "g", "mg", "ml" ]
-    strain_name:
-      type: string
-    unit_weight:
-      type: number
-    unit_weight_uom:
-      type: string
-      enum: [ "ea", "g", "mg", "ml" ]
+description: A description of a specific package
+type: object
+examples:
+  - id: '00000000000001'
+    sku: '8198110'
+    name: Blue Dreams - 3.5g
+    uom: ea
+    strain_name: Blue Dreams
+    product_type: flower
+    content:
+      unit_of_measure: g
+      unit: 3.5
+properties:
+  id:
+    type: string
+    description: Universally unique traceability id
+  sku:
+    type: string
+    description: Barcode/puk/code used by vendor
+  name:
+    type: string
+    description: Name of the product
+  uom:
+    type: string
+    enum:
+      - ea
+      - g
+      - mg
+      - ml
+      - lb
+    description: Unit of measure
+  strain_name:
+    type: string
+    description: Name of the strain if applicable
+  product_type:
+    type: string
+    enum:
+      - kief
+      - wet_flower
+      - wet_other_plant_material
+      - dry_flower
+      - dry_other_material
+      - clone
+      - seed
+      - plant_tissue
+      - mature_plant
+      - infused_solid_edible
+      - infused_liquid_edible
+      - extract_for_inhalation
+      - infused_topicals
+      - mix
+      - mix_infused
+      - capsule
+      - tincture
+      - transdermal_patch
+      - suppository
+      - hash
+      - hydrocarbon_wax
+      - co2_hash_oil
+      - non_cannabis
+    description: 'Indicates the type of product, should be set to non_cannabis if the product is not a cannabis or is not a cannabis derivative'
+  content:
+    $ref: ./product_unit_of_content.yaml
+required:
+  - id
+  - name
+  - uom
+  - product_type

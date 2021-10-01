@@ -1,31 +1,65 @@
-
-  description: "A business to business transfer of packages"
-  type: object
-  required: [ "id", "type", "source", "target", "item_list" ]
-  properties:
-    id:
-      description: "ULID"
-      type: string
-    source_licensee_number:
-      description: "The Source License of the materials, aka: Seller, Sold By"
-      type: string
-    destination_licensee_number:
-      description: "The Target License of the materials, aka: Buyer, Ship To"
-      type: string
-    estimated_depart_datetime:
-      description: Estimate of Departure Time
-      type: string
-      format: dateTime
-    estimated_arrival_datetime:
-      description: Estimate of Arrival Time
-      type: string
-      format: dateTime
+description: A business to business transfer of packages
+type: object
+properties:
+  id:
+    description: ULID Universally unique identifier of the transfer
+    type: string
+  source_licensee_number:
+    description: 'State/Governing body assinged business identifier of The Source Licensee, aka: Seller, Sold By.'
+    type: string
+  destination_licensee_number:
+    description: 'State/Governing body assigned business identifier of  Target License aka: Buyer, Ship To'
+    type: string
+  estimated_depart_datetime:
+    description: Estimate of Departure Time
+    type: string
+    format: dateTime
+  estimated_arrival_datetime:
+    description: Estimate of Arrival Time
+    type: string
+    format: dateTime
+  item_list:
+    type: array
+    $ref: transfer_item.yaml
+  products_lookup:
+    type: array
+    $ref: product.yaml
+  lab_results_lookup:
+    type: array
+    $ref: lab_result.yaml
+required:
+  - id
+  - item_list
+examples:
+  - id: string
+    source_licensee_number: string
+    destination_licensee_number: string
+    estimated_depart_datetime: string
+    estimated_arrival_datetime: string
     item_list:
-      type: array
-      $ref: 'transfer_item.yaml'
+      id: string
+      inventory_tsid: string
+      lab_result_tsid: string
+      product_tsid: string
+      sample_type: vendor
+      transfered_quantity: 0
+      unit_price: 0
     products_lookup:
-        type: array
-        $ref: 'product.yaml'
+      id: '00000000000001'
+      sku: '8198110'
+      name: Blue Dreams - 3.5g
+      uom: ea
+      strain_name: Blue Dreams
+      product_type: flower
+      content:
+        unit_of_measure: g
+        unit: 3.5
     lab_results_lookup:
-        type: array
-        $ref: 'lab_result.yaml'
+      id: string
+      lot_tsid: string
+      lab_license_number: string
+      compounds:
+        - name: thc
+          value: 0
+          unit: mg_per_g
+title: ''
