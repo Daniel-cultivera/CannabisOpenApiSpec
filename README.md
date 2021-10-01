@@ -2,6 +2,7 @@
 
 ## Working on your OpenAPI Definition
 
+
 ### Install
 
 1. Install [Node JS](https://nodejs.org/).
